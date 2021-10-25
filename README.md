@@ -33,3 +33,24 @@ $ pyenv install pypy3.7-7.3.2
 ```
 $ pyenv local pypy3.7-7.3.2
 ```
+## 競技用プログラミングのスニペットの設定
+
+↓をpython.jsonにコピペする(⚙マーク→コマンドパレット → Configure User Snipet → python.json)
+
+```
+{
+    "import atcoder": {
+        "prefix": "import atcoder",
+        "body": [
+            "def main():",
+            "    n = int(input())",
+            "    print()",
+            "",
+            "if __name__ == '__main__':",
+            "    main()",
+            "",
+        ],
+        "description": ""
+    },
+}
+```
