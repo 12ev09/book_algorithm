@@ -42,6 +42,17 @@ $ pyenv local pypy3.7-7.3.2
     "import atcoder": {
         "prefix": "import atcoder",
         "body": [
+            "def chmax(dp,i,j,x):", 
+            "   if x> dp[i][j]:",
+            "       dp[i][j]=x", 
+            "       return True",
+            "   return False",
+            "def chmin(dp,i,j,x):",
+            "   if x<dp[i][j]: ",
+            "       dp[i][j]=x",
+            "       return True",
+            "   return False",
+            "",
             "def main():",
             "    n = int(input())",
             "    print()",
