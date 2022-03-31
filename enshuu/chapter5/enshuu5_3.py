@@ -1,40 +1,32 @@
 """
 n個の整数をいくつか足し合わせて、和が1以上W以下の整数となる整数は何通りか
+
+→ dp[N][j] が Trueであるものが何個あるか
 """
 
-def solution():
+N, W = map(int, input().split())
+A = list(map(int, input().split()))
 
-    n,w= map(int,input().split())
+"""
+dp[i][j] i番目まででいくつか選んだ総和がWに一致するかどうか
+"""
+dp = [[False for _ in range(W+1)] for _ in range(N+1)]
 
-    a = list(map(int,input().split()))
+dp[0][0] = True
 
-    """
-    dp[i][j] :最初のiこの整数からいくつか選んだ整数の和がjかどうかをを表すブール変数
+for i in range(N):
+    for j in range(W+1):
+        # A[i] を選ぶ場合
+        if j-A[i] >= 0 and dp[i][j-A[i]]:
+            dp[i+1][j] = True
 
-    dp[i+1][j]の値を考えるとき、a[i]を選ぶか選ばないで場合分けする
+        # A[i] を選ばない場合
+        if dp[i][j]:
+            dp[i+1][j] = True
 
-    a[i]を選ばない　→ dp[i][j]がtrueならa[i+1][j]はtrueになる(和がへんかしないので)
+ans = 0
+for i in range(1, W+1):
+    if dp[N][i]:
+        ans += 1
 
-    a[i]を選ぶ　　　→ j => a[i] かつ dp[i][j-a[i]]がtrue　なら true
-
-    dp[n][j] 1〜Wを調べてtrueの個数を数えれば良い
-    """
-
-    dp = [[False]*(w+1)]*(n+1)
-    dp[0][0]=True
-
-    for i in range(n):
-        for j in range(1,w+1):
-            if dp[i][j]: 
-                dp[i+1][j] =True
-            if j >= a[i] and dp[i][j-a[i]]:
-                dp[i+1][j] = True
-                
-    """
-    dp[n][j] 1〜Wを調べてtrueの個数を数えれば良い
-    """            
-    ans =0
-    for j in range(1,w+1):
-        if dp[n][j]:ans+=1
-    
-    print(ans)
+print(ans)
